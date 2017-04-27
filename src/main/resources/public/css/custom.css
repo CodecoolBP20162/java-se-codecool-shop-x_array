@@ -8,11 +8,22 @@
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+    max-height: 400px;
+    max-width: 450px;
 }
 .thumbnail img
 {
     margin-top: 10px;
+
 }
+
+img {
+
+    max-height: 120px;
+    max-width: 120px;
+
+}
+
 .item.list-group-item
 {
     float: none;
@@ -64,6 +75,7 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Dropdown button on hover & focus */
@@ -103,4 +115,12 @@
 
 .filters {
     display: inline-block;
+}
+
+.jumbotron {
+
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
 }

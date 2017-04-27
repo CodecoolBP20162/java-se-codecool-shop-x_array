@@ -18,6 +18,7 @@
 
 
     <link rel="stylesheet" type="text/css" href="/css/cart.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
 
 
 </head>
@@ -57,17 +58,18 @@
                              th:attr="src='/img/product_' + ${prod.getProductId()} + '.jpg'" alt=""/></td>
                     <td th:text="${prod.getName()}">name</td>
                     <td th:text="${prod.getUnitPrice()}+ ' '+ ${prod.getDefaultCurrency()}">price</td>
-                    <td class="bttn"><a class="btn btn-success" th:href="'/cart1/' + ${prod.getId()}">+</a></td>
-                    <td class="quantity bttn" th:text="${prod.quantity}"></td>
                     <td class="bttn"><a class="btn btn-success" th:href="'/cart-1/' + ${prod.getId()}">-</a></td>
+                    <td class="quantity bttn" th:text="${prod.quantity}"></td>
+                    <td class="bttn"><a class="btn btn-success" th:href="'/cart1/' + ${prod.getId()}">+</a></td>
                     <td class="total cost" th:text="${prod.getTotalPrice()}+' '+ ${prod.getDefaultCurrency()}">100</td>
 
 
                 </tr>
             </table>
             <div>
-                <h1>Total amount of potatoes: </h1>
-                <h1 th:text="${ShopCart.getSumOfAll()}+' '+ ${ShopCart.getDefaultCurrency()}">0 </h1>
+                <h3>Total amount: </h3>
+                <p th:text="${ShopCart.getSumOfAll()}+' '+ ${ShopCart.getDefaultCurrency()}">0 </p>
+                <h3><a class="btn btn-success remove">Proceed to Checkout</a></h3>
             </div>
         </div>
     </div>
