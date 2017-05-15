@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ShoppingCartDaoJDBC extends JDBC implements ShoppingCartDao {
@@ -103,11 +104,11 @@ public class ShoppingCartDaoJDBC extends JDBC implements ShoppingCartDao {
                 numberOfItems = resultSet.getInt("prod_id");
                 productIDs.add(numberOfItems);
             }
+            Collections.sort(productIDs);
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(productIDs);
         for (Integer item : productIDs) {
             lineItemsFromDB.add(find(item));
         }
@@ -135,7 +136,7 @@ public class ShoppingCartDaoJDBC extends JDBC implements ShoppingCartDao {
             if (resultSet.next()) {
 
                 totalPrice = resultSet.getFloat("total_price");
-                return Float.toString(totalPrice);
+                return Float.toString(totalPrice)+" USD";
             } else {
                 return null;
             }
