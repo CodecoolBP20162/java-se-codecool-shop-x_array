@@ -1,6 +1,5 @@
 package com.codecool.shop.dao.implementation;
 
-
 import com.codecool.shop.dao.JDBC;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
@@ -12,12 +11,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>Class to extend JDBC and implement SupplierDao</h1>
+ * This implementation uses the database to store data.
+ *
+ * @author Adam Kovacs
+ * @author Daniel Majoross
+ * @author Anna Racz
+ * @version 1.0
+ * @since 20-05-2017
+ */
+
 public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     private static SupplierDaoJDBC instance = null;
 
+    /**
+     * ShoppingCartDaoJDBC empty constructor
+     */
     private SupplierDaoJDBC() {
     }
 
+    /**
+     * To get instance of SupplierDaoJDBC if none exists
+     *
+     * @return instance of SupplierDaoJDBC
+     */
     public static SupplierDaoJDBC getInstance() {
         if (instance == null) {
             instance = new SupplierDaoJDBC();
@@ -25,6 +43,13 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         return instance;
     }
 
+    /**
+     * To set up supplier from database
+     *
+     * @param resultSet result set of SQL query from database
+     * @return supplier Supplier object
+     * @throws SQLException for invalid input
+     */
     public Supplier supplierSetup(ResultSet resultSet) throws SQLException {
         Supplier supplier = new Supplier(
                 resultSet.getInt("supplier_id"),
@@ -34,7 +59,10 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         return supplier;
     }
 
-
+    /**
+     * @see SupplierDao#add(Supplier)
+     *
+     */
     @Override
     public void add(Supplier supplier) {
 
@@ -44,7 +72,10 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         executeQuery(query);
     }
 
-
+    /**
+     * @see SupplierDao#find(int)
+     *
+     */
     @Override
     public Supplier find(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -70,7 +101,10 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         return null;
     }
 
-
+    /**
+     * @see SupplierDao#remove(int)
+     *
+     */
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -81,7 +115,10 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
         executeQuery(query);
     }
 
-
+    /**
+     * @see SupplierDao#getAll()
+     *
+     */
     @Override
     public List<Supplier> getAll() {
 

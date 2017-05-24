@@ -13,12 +13,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>Class to extend JDBC and implement ProductDao</h1>
+ * This implementation uses the database to store data.
+ *
+ * @author Adam Kovacs
+ * @author Daniel Majoross
+ * @author Anna Racz
+ * @version 1.0
+ * @since 20-05-2017
+ *
+ */
+
 public class ProductDaoJDBC extends JDBC implements ProductDao {
     private static ProductDaoJDBC instance = null;
 
+    /**
+     * ProductDaoJDBC empty constructor
+     */
     private ProductDaoJDBC() {
     }
 
+    /**
+     * To get instance of ProductDaoJDBC if none exists
+     * @return instance of ProductDaoJDBC
+     */
     public static ProductDaoJDBC getInstance() {
 
         if (instance == null) {
@@ -27,6 +46,13 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return instance;
     }
 
+    /**
+     * To set up supplier from database
+     *
+     * @param resultSet result set of SQL query from database
+     * @return supplier Supplier object
+     * @throws SQLException for invalid input
+     */
     public Supplier supplierSetup(ResultSet resultSet) throws SQLException {
         Supplier supplier = new Supplier(
                 resultSet.getInt("supplier_id"),
@@ -36,6 +62,12 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return supplier;
     }
 
+    /**
+     * To set up product category from database
+     * @param resultSet result set of SQL query from database
+     * @return category ProductCategory object
+     * @throws SQLException for invalid input
+     */
     public ProductCategory productCategorySetup(ResultSet resultSet) throws SQLException {
         ProductCategory category = new ProductCategory(
                 resultSet.getInt("category_id"),
@@ -46,6 +78,12 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return category;
     }
 
+    /**
+     * To set up product from database
+     * @param resultSet result set of SQL query from database
+     * @return product Product object
+     * @throws SQLException for invalid input
+     */
     public Product productSetup(ResultSet resultSet) throws SQLException {
 
         Product result = new Product(
@@ -60,7 +98,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return result;
     }
 
-
+    /**
+     * @see ProductDao#add(Product)
+     *
+     */
     @Override
     public void add(Product product) {
 
@@ -72,6 +113,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     }
 
 
+    /**
+     * @see ProductDao#find(int)
+     *
+     */
     @Override
     public Product find(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -103,7 +148,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return null;
     }
 
-
+    /**
+     * @see ProductDao#remove(int)
+     *
+     */
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -114,7 +162,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         executeQuery(query);
     }
 
-
+    /**
+     * @see ProductDao#getAll()
+     *
+     */
     @Override
     public List<Product> getAll() {
 
@@ -143,7 +194,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return productsFromDB;
     }
 
-
+    /**
+     * @see ProductDao#getBy(Supplier)
+     *
+     */
     @Override
     public List<Product> getBy(Supplier supplier) {
 
@@ -169,7 +223,10 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         return productsFromDB;
     }
 
-
+    /**
+     * @see ProductDao#getBy(ProductCategory)
+     *
+     */
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
 
