@@ -1,6 +1,5 @@
 package com.codecool.shop.dao.implementation;
 
-
 import com.codecool.shop.dao.JDBC;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
@@ -12,12 +11,31 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <h1>Class to extend JDBC and implement ProductCategoryDao</h1>
+ * This implementation uses the database to store data.
+ *
+ * @author Adam Kovacs
+ * @author Daniel Majoross
+ * @author Anna Racz
+ * @version 1.0
+ * @since 20-05-2017
+ *
+ */
+
 public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     private static ProductCategoryDaoJDBC instance = null;
 
+    /**
+     * ProductCategoryDaoJDBC empty constructor
+     */
     private ProductCategoryDaoJDBC() {
     }
 
+    /**
+     * To get instance of ProductCategoryDaoJDBC if none exists
+     * @return instance of ProductCategoryDaoJDBC
+     */
     public static ProductCategoryDaoJDBC getInstance() {
         if (instance == null) {
             instance = new ProductCategoryDaoJDBC();
@@ -25,6 +43,13 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
         return instance;
     }
 
+    /**
+     * To set up product category from database
+     *
+     * @param resultSet result set of SQL query from database
+     * @return category ProductCategory object
+     * @throws SQLException for invalid input
+     */
     public ProductCategory productCategorySetup(ResultSet resultSet) throws SQLException {
         ProductCategory category = new ProductCategory(
                 resultSet.getInt("category_id"),
@@ -35,7 +60,10 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
         return category;
     }
 
-
+    /**
+     * @see ProductCategoryDao#add(ProductCategory)
+     *
+     */
     @Override
     public void add(ProductCategory category) {
         String query = "INSERT INTO categories (category_id,category_name,department,category_description)" +
@@ -45,7 +73,10 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
 
     }
 
-
+    /**
+     * @see ProductCategoryDao#find(int)
+     *
+     */
     @Override
     public ProductCategory find(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -73,7 +104,10 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
         return null;
     }
 
-
+    /**
+     * @see ProductCategoryDao#remove(int)
+     *
+     */
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
@@ -84,6 +118,10 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     }
 
 
+    /**
+     * @see ProductCategoryDao#getAll()
+     *
+     */
     @Override
     public List<ProductCategory> getAll() {
         List<ProductCategory> productCategoriesFromDB = new ArrayList<ProductCategory>();
