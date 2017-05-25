@@ -2,14 +2,44 @@ package com.codecool.shop.model;
 
 import java.util.Currency;
 
+/**
+ * <h1>Class is used to construct Products stored in the shopping cart</h1>
+ *
+ * @author Adam Kovacs
+ * @author Daniel Majoross
+ * @author Anna Racz
+ * @version 1.0
+ * @since 20-05-2017
+ */
+
 public class Product extends BaseModel {
 
+    /**
+     * Default price of the product
+     */
     private float defaultPrice;
+    /**
+     * Default currency of the product
+     */
     private Currency defaultCurrency;
+    /**
+     * Product category of the product
+     */
     private ProductCategory productCategory;
+    /**
+     * Supplier of the product
+     */
     private Supplier supplier;
 
-
+    /**
+     * First constructor
+     * @param name name of each product instance
+     * @param defaultPrice default price of instance
+     * @param currencyString currency of instance
+     * @param description description of product instance
+     * @param productCategory product category of instance
+     * @param supplier supplier of product instance
+     */
     public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
@@ -18,6 +48,16 @@ public class Product extends BaseModel {
 
     }
 
+    /**
+     * Second constructor which also sets ID
+     * @param id ID for each product instance
+     * @param name name of each product instances
+     * @param defaultPrice default price of instance object
+     * @param currencyString currency of instance
+     * @param description description of product instance
+     * @param productCategory product category of product instance
+     * @param supplier supplier of instance
+     */
     public Product(int id, String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
         super(name);
         this.setId(id);
@@ -78,6 +118,10 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    /**
+     * Overwrites default toString method
+     * @return formatted string with attributes of object
+     */
     @Override
     public String toString() {
         return String.format("id: %1$d, " +

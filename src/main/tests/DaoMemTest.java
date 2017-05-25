@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class dao_tests {
+public class DaoMemTest {
     @Test
     public void invalidProductFindParameter() throws IllegalArgumentException {
         ProductDaoMem productDaoMem = ProductDaoMem.getInstance();
