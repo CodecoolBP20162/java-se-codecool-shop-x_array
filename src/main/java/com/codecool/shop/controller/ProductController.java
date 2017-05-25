@@ -120,5 +120,13 @@ public class ProductController {
         params.put("TotalPrice", shoppingCartDataStore.getTotal());
         return new ModelAndView(params, "product/cart");
     }
+
+    public static ModelAndView renderOrder(Request req, Response res) {
+
+        Map params = new HashMap<>();
+        params.put("cart", shoppingCartDataStore.getAll());
+        params.put("TotalPrice", shoppingCartDataStore.getTotal());
+        return new ModelAndView(params, "product/checkout");
+    }
 }
 
