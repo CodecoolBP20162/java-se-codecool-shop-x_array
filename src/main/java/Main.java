@@ -56,7 +56,7 @@ public class Main {
          */
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ShoppingCartDaoJDBC shoppingCartDataStore = ShoppingCartDaoJDBC.getInstance();
-
+        UserDaoJDBC userdataStore = UserDaoJDBC.getInstance();
         /**
          * Default server settings
          */
@@ -147,7 +147,30 @@ public class Main {
             return null;
         });
 
+        /**
+         * CheckoutPage
+         */
+        get("/checkout", ProductController::renderOrder, new ThymeleafTemplateEngine());
 
+        post("/checkout", (Request req, Response res) -> {
+
+
+            String name = req.queryParamsValues("name")[0];
+            String phoneNumber = req.queryParamsValues("phone_number")[0];
+            String billingAddress = req.queryParamsValues("billing_address")[0];
+            String shippingAddress = req.queryParamsValues("shipping_address")[0];
+            String emailAddress = req.queryParamsValues("e-mail_address")[0];
+            User user = new User(name,phoneNumber,billingAddress,shippingAddress,emailAddress);
+
+            if(userdataStore.find(user.getId()) != null) {
+                userdataStore.remove(user);
+            }
+            userdataStore.add(user);
+
+
+            res.redirect("/cart");
+        return null;
+    });
         // Add this line to your project to enable the debug screen
         enableDebugScreen();
 

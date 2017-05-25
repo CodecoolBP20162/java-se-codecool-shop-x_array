@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS shoppingcart;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE suppliers
 (
@@ -37,4 +38,14 @@ CREATE TABLE shoppingcart
   quantity              INT,
   subtotal_price        FLOAT,
   product_price         FLOAT
+);
+
+CREATE TABLE users
+(
+  user_id               SERIAL PRIMARY KEY,
+  user_name             VARCHAR(50),
+  phone_number          VARCHAR(50),
+  billing_address       VARCHAR(100),
+  shipping_address      VARCHAR(100),
+  email_address         VARCHAR(100)
 );
