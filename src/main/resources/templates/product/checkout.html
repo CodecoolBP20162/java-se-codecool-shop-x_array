@@ -36,36 +36,43 @@
         <strong>Checkout </strong>
     </div>
     <form class="form-horizontal" method="post">
-        <fieldset>
-            <legend>Personal information:</legend>
+        <legend>Personal information:</legend>
         <div class="form-group">
-            Name:
-            <input type="text" name="name" value="Name" th:value="*{name}"></input>
+            <label class="control-label col-sm-1">Name:</label>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Enter name" type="text" name="name" value="Name" th:value="*{name}"/>
+            </div>
         </div>
         <div class="form-group">
-        Phone number:
-            <input type="text" name="phone_number" value="0614322222" th:value="*{phoneNumber}"></input>
+            <label class="control-label col-sm-1">Email:</label>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Enter billing address" type="text" name="e-mail_address" value="somebody@gmail.com" th:value="*{emailAddress}"/>
+            </div>
         </div>
         <div class="form-group">
-        Billing address:
-            <input type="text" name="billing_address" value="Hungary, Mucsaröcsöge, Petőfi str 15." th:value="*{billingAddress}"></input>
+            <label class="control-label col-sm-1">Phone number:</label>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Enter phone number" type="text" name="phone_number" value="0614322222" th:value="*{phoneNumber}"/>
+            </div>
         </div>
         <div class="form-group">
-        Shipping address:
-            <input type="text" name="shipping_address" value="Hungary, Mucsaröcsöge, Petőfi str 15." th:value="*{shippingAddress}"></input>
+            <label class="control-label col-sm-1">Billing address:</label>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Enter billing address" type="text" name="billing_address" value="Hungary, Mucsaröcsöge, Petőfi str 15." th:value="*{billingAddress}"/>
+            </div>
         </div>
         <div class="form-group">
-            E-mail address
-            <input type="text" name="e-mail_address" value="somebody@gmail.com" th:value="*{emailAddress}"></input>
+            <label class="control-label col-sm-1">Shipping address:</label>
+            <div class="col-sm-4">
+                <input class="form-control" placeholder="Enter billing address" type="text" name="shipping_address" value="Hungary, Mucsaröcsöge, Petőfi str 15." th:value="*{shippingAddress}"/>
+            </div>
         </div>
-        <input type="submit" value="Submit"></input>
-    </fieldset>
     </form>
 
     <div>
         <h3>Total amount: </h3>
         <p th:text="${TotalPrice}">0 </p>
-        <h3><a class="btn btn-warning remove">Proceed to Pay</a></h3>
+        <h3><a class="btn btn-warning remove">Proceed to Payment</a></h3>
     </div>
 </div>
 
