@@ -3,6 +3,8 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.JDBC;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,6 +25,7 @@ import java.util.List;
  */
 
 public class SupplierDaoJDBC extends JDBC implements SupplierDao {
+    private static final Logger logger = LoggerFactory.getLogger(SupplierDaoJDBC.class);
     private static SupplierDaoJDBC instance = null;
 
     /**
@@ -79,6 +82,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     @Override
     public Supplier find(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("Id cannot be smaller than 1");
         }
 
@@ -91,13 +95,13 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
             if (resultSet.next()) {
                 return supplierSetup(resultSet);
             } else {
+                logger.warn("Couldn't find supplier");
                 return null;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -108,6 +112,7 @@ public class SupplierDaoJDBC extends JDBC implements SupplierDao {
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("Id cannot be smaller than 1");
         }
 

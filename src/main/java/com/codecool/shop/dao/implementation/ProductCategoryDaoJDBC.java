@@ -3,6 +3,8 @@ package com.codecool.shop.dao.implementation;
 import com.codecool.shop.dao.JDBC;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.model.ProductCategory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,6 +26,7 @@ import java.util.List;
  */
 
 public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
+    private static final Logger logger = LoggerFactory.getLogger(ProductCategoryDaoJDBC.class);
     private static ProductCategoryDaoJDBC instance = null;
 
     /**
@@ -80,6 +83,7 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     @Override
     public ProductCategory find(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("Id cannot be smaller than 1");
         }
         String query = "SELECT * FROM categories WHERE category_id = '" + id + "' ;";
@@ -111,7 +115,9 @@ public class ProductCategoryDaoJDBC extends JDBC implements ProductCategoryDao {
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("Id cannot be smaller than 1");
+
         }
         String query = "DELETE FROM categories WHERE category_id = '" + id + "';";
         executeQuery(query);

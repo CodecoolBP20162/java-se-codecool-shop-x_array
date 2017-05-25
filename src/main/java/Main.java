@@ -5,6 +5,8 @@ import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -29,8 +31,11 @@ import static spark.debug.DebugScreen.enableDebugScreen;
  */
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException {
+        logger.info("Setting up website!");
+
 
         /**
          * Main method, controlling the application.
@@ -100,9 +105,11 @@ public class Main {
          */
         get("/add/:id", (Request req, Response res) -> {
 
+
             Product product = productDataStore.find(Integer.parseInt(req.params(":id")));
             LineItem item = new LineItem(product, 1);
             shoppingCartDataStore.add(item);
+            logger.info("{} added to cart!", product.getName());
             res.redirect("/");
             return null;
         });
@@ -134,6 +141,7 @@ public class Main {
         get("/cart/remove/:id", (Request req, Response res) -> {
             LineItem item = shoppingCartDataStore.find(Integer.parseInt(req.params(":id")));
             shoppingCartDataStore.remove(item);
+            logger.info(item+" removed from cart!");
             item.setQuantity(1);
             res.redirect("/cart");
             return null;
