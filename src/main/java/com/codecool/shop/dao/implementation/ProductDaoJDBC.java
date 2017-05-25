@@ -5,6 +5,8 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDaoJDBC extends JDBC implements ProductDao {
+    private static final Logger logger = LoggerFactory.getLogger(ProductDaoJDBC.class);
     private static ProductDaoJDBC instance = null;
 
     private ProductDaoJDBC() {
@@ -75,6 +78,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     @Override
     public Product find(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("id cannot be lower than 1");
         }
 
@@ -93,13 +97,14 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
 
                 return productSetup(resultSet);
             } else {
+                logger.warn("Couldn't find item");
                 return null;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        logger.warn("Couldn't find item");
         return null;
     }
 
@@ -107,11 +112,13 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
     @Override
     public void remove(int id) throws IllegalArgumentException {
         if (id < 1) {
+            logger.warn("Id cannot be smaller than 1");
             throw new IllegalArgumentException("Id cannot be smaller than 1");
         }
 
         String query = "DELETE FROM products WHERE product_id = '" + id + "';";
         executeQuery(query);
+        logger.info("item removed from table");
     }
 
 
@@ -165,7 +172,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        logger.info("Filtering by supplier from table");
         return productsFromDB;
     }
 
@@ -191,7 +198,7 @@ public class ProductDaoJDBC extends JDBC implements ProductDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
+        logger.info("Filtering by category from table");
         return productsFromDB;
     }
 }

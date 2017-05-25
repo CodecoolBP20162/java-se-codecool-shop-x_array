@@ -2,12 +2,15 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.LineItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class ShoppingCartDaoMem implements ShoppingCartDao {
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDaoMem.class);
     private boolean isThere;
 
     //List to store items in the cart

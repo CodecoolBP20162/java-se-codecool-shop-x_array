@@ -5,12 +5,15 @@ import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoMem implements ProductDao {
+    private static final Logger logger = LoggerFactory.getLogger(ProductDaoMem.class);
 
     private List<Product> DATA = new ArrayList<>();
     private static ProductDaoMem instance = null;
@@ -21,6 +24,7 @@ public class ProductDaoMem implements ProductDao {
     }
 
     public static ProductDaoMem getInstance() {
+
         if (instance == null) {
             instance = new ProductDaoMem();
         }
@@ -36,6 +40,7 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public Product find(int id) throws IllegalArgumentException {
         if(id < 1){
+            logger.info("Id cannot be lower than 1");
             throw new IllegalArgumentException("Id cannot be lower than 1");
         }
         return DATA.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
@@ -44,6 +49,7 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public void remove(int id)throws IllegalArgumentException {
         if(id < 1){
+            logger.info("Id cannot be lower than 1");
             throw new IllegalArgumentException("Id cannot be lower than 1");
         }
         DATA.remove(find(id));
@@ -56,11 +62,13 @@ public class ProductDaoMem implements ProductDao {
 
     @Override
     public List<Product> getBy(Supplier supplier) {
+        logger.info("filtering by supplier");
         return DATA.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
+        logger.info("filtering by category");
         return DATA.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
     }
 }

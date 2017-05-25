@@ -5,6 +5,8 @@ import com.codecool.shop.dao.JDBC;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.ShoppingCartDao;
 import com.codecool.shop.model.LineItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ShoppingCartDaoJDBC extends JDBC implements ShoppingCartDao {
+    private static final Logger logger = LoggerFactory.getLogger(ShoppingCartDaoJDBC.class);
     private static ShoppingCartDaoJDBC instance = null;
 
     private ShoppingCartDaoJDBC() {
@@ -78,6 +81,7 @@ public class ShoppingCartDaoJDBC extends JDBC implements ShoppingCartDao {
 
                 return lineItemSetup(resultSet);
             } else {
+                logger.warn("Couldn't find LineItem by id");
                 return null;
             }
 
