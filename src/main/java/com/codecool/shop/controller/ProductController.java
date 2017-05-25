@@ -120,6 +120,5 @@ public class ProductController {
         params.put("TotalPrice", shoppingCartDataStore.getTotal());
         return new ModelAndView(params, "product/cart");
     }
-
 }
 

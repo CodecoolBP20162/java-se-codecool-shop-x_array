@@ -115,12 +115,13 @@ img {
 
 .filters {
     display: inline-block;
+    padding: 10px;
 }
 
 .jumbotron {
-    background-image: url("public/img/background.jpg");
+    background-image: url("img/wallpaper.png");
     font-weight: 900;
-    color: white;
+    color: #F4A238;
     border: none;
 
 }

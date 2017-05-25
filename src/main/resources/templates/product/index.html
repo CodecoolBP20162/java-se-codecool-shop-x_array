@@ -32,39 +32,41 @@
 
 <body>
 
-<div class="jumbotron text-center" style="background-color: #FECD57;" >
+<div class="jumbotron text-center" style="background-color: #FECD57;">
     <h1>Codecool Shop</h1>
-    <a href="/cart"><button class=" fa fa-shopping-cart fa-3 jumbotron-icon" id="cart" aria-hidden="true" style="height: 40px; width: 40px; border-radius: 5px; font-size: 24px;"></button></a>
-</div>
+    <a href="/cart" class="btn btn-info btn-lg">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart
+    </a>
 
-<div class="well well-sm">
 
-    <div class="filters">
-        <div class="dropdown" id="supplier-filter">
-            <button class="dropbtn" type="button" data-toggle="dropdown">Filter by supplier
+    <div>
+
+        <div class="filters">
+            <div class="dropdown" id="supplier-filter">
+                <button class="dropbtn" type="button" data-toggle="dropdown">Filter by supplier
+                    <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li th:each="supplier,iterStat : ${suppliers}">
+                        <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name}"></a>
+                    </li>
+                    <li><a href="/">ALL</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="dropdown" id="category-filter ">
+            <button class="dropbtn" type="button" data-toggle="dropdown">Filter by
+                category
                 <span class="caret"></span></button>
             <ul class="dropdown-menu">
-                <li th:each="supplier,iterStat : ${suppliers}">
-                    <a th:text="${supplier.name}" th:href="'/supplier/' + ${supplier.name}"></a>
+                <li th:each="category,iterStat : ${categories}">
+                    <a th:text="${category.name}" th:href="'/category/' + ${category.name}"></a>
                 </li>
                 <li><a href="/">ALL</a></li>
             </ul>
         </div>
     </div>
-
-    <div class="dropdown" id="category-filter ">
-        <button class="dropbtn" type="button" data-toggle="dropdown">Filter by
-            category
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li th:each="category,iterStat : ${categories}">
-                <a th:text="${category.name}" th:href="'/category/' + ${category.name}"></a>
-            </li>
-            <li><a href="/">ALL</a></li>
-        </ul>
-    </div>
 </div>
-
 
 
 <div id="products" class="row list-group">
