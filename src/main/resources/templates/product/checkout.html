@@ -67,13 +67,15 @@
                 <input class="form-control" placeholder="Enter billing address" type="text" name="shipping_address" value="Hungary, Mucsaröcsöge, Petőfi str 15." th:value="*{shippingAddress}"/>
             </div>
         </div>
+        <div class="col-sm-10">
+            <h3>Total amount: </h3>
+            <p th:text="${TotalPrice}">0 </p>
+            <h3><input class="btn btn-warning remove" type="submit" value="Proceed to Payment"/></h3>
+            <br/>
+        </div>
+
     </form>
 
-    <div class="col-sm-10">
-        <h3>Total amount: </h3>
-        <p th:text="${TotalPrice}">0 </p>
-        <h3><a class="btn btn-warning remove">Proceed to Payment</a></h3>
-    </div>
 </div>
 
 
